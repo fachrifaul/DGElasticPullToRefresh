@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     // MARK: Vars
     
     fileprivate var tableView: UITableView!
+    let loadingView = DGElasticPullToRefreshLoadingViewCircle()
     
     // MARK: -
     
@@ -33,7 +34,7 @@ class ViewController: UIViewController {
         tableView.backgroundColor = UIColor(red: 250/255.0, green: 250/255.0, blue: 251/255.0, alpha: 1.0)
         view.addSubview(tableView)
         
-        let loadingView = DGElasticPullToRefreshLoadingViewCircle()
+        
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
         tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
@@ -46,6 +47,14 @@ class ViewController: UIViewController {
     
     deinit {
         tableView.dg_removePullToRefresh()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadingView.startAnimating()
+        loadingView.layoutSubviews()
     }
     
 }

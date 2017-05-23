@@ -129,6 +129,18 @@ public extension UIScrollView {
     public func dg_stopLoading() {
         pullToRefreshView?.stopLoading()
     }
+    
+    //add by Peter Tan
+    public func dg_startLoading() {
+        pullToRefreshView?.startLoading()
+    }
+    
+    func dg_stopScrollingAnimation() {
+        if let superview = self.superview, let index = superview.subviews.index(where: { $0 == self }) as Int! {
+            removeFromSuperview()
+            superview.insertSubview(self, at: index)
+        }
+    }
 }
 
 // MARK: -

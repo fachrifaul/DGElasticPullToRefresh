@@ -214,6 +214,15 @@ open class DGElasticPullToRefreshView: UIView {
         state = .animatingToStopped
     }
     
+    func startLoading() {
+        //Only Stopped can StartLoading
+        if state != .stopped
+        {
+            return
+        }
+        state = .animatingBounce
+    }
+    
     // MARK: Methods (Private)
     
     fileprivate func isAnimating() -> Bool {
